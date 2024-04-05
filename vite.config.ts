@@ -4,6 +4,7 @@ import { defineConfig } from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
 import { copyFileSync } from "node:fs";
 import { join } from "node:path";
+import { nodePolyfills } from 'vite-plugin-node-polyfills'
 
 installGlobals();
 
@@ -20,5 +21,8 @@ export default defineConfig({
         join(buildPath, "404.html"),
       );
     }
-  }), tsconfigPaths()],
+  }), tsconfigPaths(),
+    nodePolyfills({
+      exclude: ['stream', 'fs']
+    }),],
 });
